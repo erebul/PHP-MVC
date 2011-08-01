@@ -1,0 +1,18 @@
+Options +FollowSymLinks
+RewriteEngine on
+
+#compress all text & html:
+AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
+# Or, compress certain file types by extension:
+
+<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|swf)$">
+Header set Cache-Control "max-age=29030400, public"
+</FilesMatch>
+
+<FilesMatch "\.(css)$">
+Header set Cache-Control "max-age=29030400, private"
+</FilesMatch>
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?location=$1 [nc,L]
