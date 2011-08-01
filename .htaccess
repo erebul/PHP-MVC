@@ -3,8 +3,8 @@ RewriteEngine on
 
 #compress all text & html:
 AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
-# Or, compress certain file types by extension:
 
+#set cache control:
 <FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|swf)$">
 Header set Cache-Control "max-age=29030400, public"
 </FilesMatch>
@@ -13,6 +13,7 @@ Header set Cache-Control "max-age=29030400, public"
 Header set Cache-Control "max-age=29030400, private"
 </FilesMatch>
 
+#rewrite all requests to index.php, except for real files/folders requests
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?location=$1 [nc,L]
